@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BOM</title>
+</head>
+<body>
+    <div id="clock" class="clock">
+        60
+    </div>
+    <input type="button" id="start" value="start" />
+    <hr>
+    <input type="text" id="url" />
+    <input type="button" id="go" value="go" />
+</body>
+<style>
+    .clock {
+        font-size: 200px;
+    }
+</style>
+<script>
+    // window.alert("Hello BOM");
+    // var result = confirm("确认删除该记录吗？");
+    // console.log(result);
+    document.getElementById("start").onclick = function() {
+        var time = 60;
+        setInterval(() => {
+            if (time > 0) {
+                time--;
+                document.getElementById("clock").innerHTML = time;
+            }
+        }, 1000);
+    };
+
+    document.getElementById("go").onclick = function() {
+        var url = document.getElementById("url").value;
+        location.href = url;
+    };
+</script>
+</html>
