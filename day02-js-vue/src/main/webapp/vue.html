@@ -1,26 +1,112 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>VUE</title>
+    <style>
+        table {
+            border: 1px;
+            border-style: solid;
+            width: 60%;
+            text-align: center;
+        }
+    </style>
 </head>
+
 <body>
     <div id="app">
-        <input type="text" v-model="message">
-        {{ message }}
+        <input type="text" v-model="url">
+        <hr>
+        <a :href="url">Click me</a>
+        <hr>
+        <input type="button" @click="handle()" value="I am a button">
+        <hr>
+        <p>
+            <label>请输入年龄：</label><input type="text" v-model="age">
+            <br>
+            经判定，年龄{{ age }}为
+            <span v-if="age <= 35">年轻人</span>
+            <span v-else-if="age > 35 && age <= 60">中年人</span>
+            <span v-else>老年人</span>
+        </p>
+        <hr>
+        <div v-for="city in cities">
+            {{ city }}
+        </div>
+        <div v-for="(city, index) in cities">
+            {{ index + 1 }} --- {{ city }}
+        </div>
+        <hr>
+        <div>
+            <table>
+                <tr>
+                    <th>编号</th>
+                    <th>姓名</th>
+                    <th>年龄</th>
+                    <th>性别</th>
+                    <th>成绩</th>
+                    <th>等级</th>
+                </tr>
+                <tr v-for="(user, index) in users">
+                    <td>{{ index + 1 }}</td>
+                    <td>{{ user.name }}</td>
+                    <td>{{ user.age }}</td>
+                    <td v-if="user.gender == 1">男</td>
+                    <td v-else="user.gender == 2">女</td>
+                    <td>{{ user.score }}</td>
+                    <td v-if="user.score > 85">优秀</td>
+                    <td v-else-if="user.score > 60">及格</td>
+                    <td v-else style="color: red">不及格</td>
+                </tr>
+            </table>
+        </div>
     </div>
 </body>
 <script src="js/vue.js"></script>
 <script>
     new Vue({
         el: "#app",
-        data () {
-            return {
-                message: "Hello Vue."
+        data: {
+            message: "Hello Vue.",
+            url: "https://www.baidu.com",
+            age: 37,
+            cities: ["北京", "上海", "广州", "深圳"],
+            users: [
+                {
+                    name: "Tom",
+                    age: 20,
+                    gender: 1,
+                    score: 78
+                },
+                {
+                    name: "Rose",
+                    age: 18,
+                    gender: 2,
+                    score: 86
+                },
+                {
+                    name: "Jerry",
+                    age: 26,
+                    gender: 1,
+                    score: 90
+                },
+                {
+                    name: "Tony",
+                    age: 30,
+                    gender: 1,
+                    score: 52
+                }
+            ]
+        },
+        methods: {
+            handle: function () {
+                alert("click me");
             }
         }
     })
 </script>
+
 </html>
