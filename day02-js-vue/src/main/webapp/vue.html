@@ -16,6 +16,10 @@
     </style>
 </head>
 
+<!--
+    v-bind只能单向绑定，数据只能由model流向view，将data中的数据绑定到View视图中
+    v-model是双向绑定，数据既能从view流向model，也能从model流向view
+-->
 <body>
     <div id="app">
         <input type="text" v-model="url">
@@ -105,6 +109,9 @@
             handle: function () {
                 alert("click me");
             }
+        },
+        mounted () {
+            alert("我要发一个请求到后端");
         }
     })
 </script>
