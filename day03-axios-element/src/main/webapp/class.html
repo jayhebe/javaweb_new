@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Class</title>
+    <style>
+        table {
+            width: 60%;
+            border-style: solid;
+            text-align: center;
+        }
+        img {
+            width: 60px;
+            height: 60px;
+        }
+    </style>
+</head>
+<body>
+    <div id="app">
+        <table>
+            <tr>
+                <th>编号</th>
+                <th>姓名</th>
+                <th>图像</th>
+                <th>性别</th>
+                <th>职位</th>
+                <th>入职日期</th>
+                <th>最后操作时间</th>
+            </tr>
+            <tr v-for="(emp,index) in employees">
+                <td>{{ index + 1 }}</td>
+                <td>{{ emp.name }}</td>
+                <td><img :src="emp.image"></td>
+                <td v-if="emp.gender == 1">男</td>
+                <td v-else>女</td>
+                <td>{{ emp.job }}</td>
+                <td>{{ emp.entrydate }}</td>
+                <td>{{ emp.updatetime }}</td>
+            </tr>
+        </table>
+    </div>
+</body>
+<script src="js/vue.js"></script>
+<script src="js/axios.min.js"></script>
+<script>
+    new Vue({
+        el: "#app",
+        data: {
+            employees: []
+        },
+        mounted () {
+            axios.get("http://yapi.smart-xwork.cn/mock/169327/emp/list").then(resp => {
+                this.employees = resp.data["data"];
+            })
+        }
+    })
+</script>
+</html>
