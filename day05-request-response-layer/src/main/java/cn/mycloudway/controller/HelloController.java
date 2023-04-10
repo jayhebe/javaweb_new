@@ -1,9 +1,7 @@
 package cn.mycloudway.controller;
 
 import cn.mycloudway.pojo.User;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletRequest;
 import java.util.Arrays;
@@ -40,5 +38,15 @@ public class HelloController {
     @RequestMapping("/getUserInfo")
     public User getUserInfo(User user) {
         return user;
+    }
+
+    @RequestMapping("/getJsonParam")
+    public User getJsonParam(@RequestBody User user) {
+        return user;
+    }
+
+    @RequestMapping("/path/{id}")
+    public String getPathId(@PathVariable Integer id) {
+        return "ID is " + id;
     }
 }
