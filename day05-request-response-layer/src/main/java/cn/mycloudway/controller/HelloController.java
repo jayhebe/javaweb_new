@@ -1,52 +1,46 @@
 package cn.mycloudway.controller;
 
+import cn.mycloudway.pojo.Result;
 import cn.mycloudway.pojo.User;
 import org.springframework.web.bind.annotation.*;
 
-import javax.servlet.http.HttpServletRequest;
 import java.util.Arrays;
 
 @RestController
 public class HelloController {
-    @RequestMapping("/simpleParam")
-    public String simpleParam(HttpServletRequest request) {
-        String name = request.getParameter("name");
-
-        return "Hello, " + name;
-    }
-
     @RequestMapping("/hello")
-    public String hello(@RequestParam(name = "name", required = false) String username, Integer age) {
-        return "Hello " + username + ", your age is " + age;
+    public Result hello(@RequestParam(name = "name", required = false) String username, Integer age) {
+        String message = "Hello " + username + ", your age is " + age;
+        return Result.success(message);
     }
 
     @RequestMapping("/getUser")
-    public User getUser(User user) {
-        return user;
+    public Result getUser(User user) {
+        return Result.success(user);
     }
 
     @RequestMapping("/getComplexUser")
-    public User getComplexUser(User user) {
-        return user;
+    public Result getComplexUser(User user) {
+        return Result.success(user);
     }
 
     @RequestMapping("/getHobbies")
-    public String getHobbies(String[] hobby) {
-        return Arrays.toString(hobby);
+    public Result getHobbies(String[] hobby) {
+        return Result.success(Arrays.toString(hobby));
     }
 
     @RequestMapping("/getUserInfo")
-    public User getUserInfo(User user) {
-        return user;
+    public Result getUserInfo(User user) {
+        return Result.success(user);
     }
 
     @RequestMapping("/getJsonParam")
-    public User getJsonParam(@RequestBody User user) {
-        return user;
+    public Result getJsonParam(@RequestBody User user) {
+        return Result.success(user);
     }
 
     @RequestMapping("/path/{id}")
-    public String getPathId(@PathVariable Integer id) {
-        return "ID is " + id;
+    public Result getPathId(@PathVariable Integer id) {
+        return Result.success("ID is " + id);
     }
 }
