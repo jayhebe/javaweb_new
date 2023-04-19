@@ -39,15 +39,15 @@ public class Result {
     }
 
     public static Result success(Object data) {
-        return new Result(0, "success", data);
+        return new Result(1, "success", data);
     }
 
     public static Result success() {
-        return new Result(0, "success", null);
+        return new Result(1, "success", null);
     }
 
     public static Result error(String message) {
-        return new Result(1, message, null);
+        return new Result(0, message, null);
     }
 
     @Override
