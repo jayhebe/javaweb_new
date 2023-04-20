@@ -4,14 +4,11 @@ import cn.mycloudway.dao.EmpDao;
 import cn.mycloudway.pojo.Emp;
 import cn.mycloudway.service.EmpService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.context.annotation.Primary;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
-
-@Primary
 @Service
-public class EmpServiceImpl implements EmpService {
+public class EmpServiceImplNew implements EmpService {
     @Autowired
     private EmpDao empDao;
     @Override
@@ -20,9 +17,9 @@ public class EmpServiceImpl implements EmpService {
         empList.stream().forEach(emp -> {
             String gender = emp.getGender();
             if ("1".equals(gender)) {
-                emp.setGender("男");
+                emp.setGender("男士");
             } else if ("2".equals(gender)) {
-                emp.setGender("女");
+                emp.setGender("女士");
             }
 
             String job = emp.getJob();
