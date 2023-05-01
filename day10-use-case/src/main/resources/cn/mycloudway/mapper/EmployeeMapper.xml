@@ -34,7 +34,7 @@
         </where>
     </sql>
     
-    <select id="getCountByCondition" resultType="Integer">
+    <select id="getCountByCondition" resultType="Long">
         SELECT
             COUNT(*)
         FROM

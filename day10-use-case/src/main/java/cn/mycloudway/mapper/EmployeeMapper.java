@@ -8,6 +8,6 @@ import java.util.List;
 
 @Mapper
 public interface EmployeeMapper {
-    public Integer getCountByCondition(String name, Short gender, LocalDate startDate, LocalDate endDate);
+    public Long getCountByCondition(String name, Short gender, LocalDate startDate, LocalDate endDate);
     public List<Employee> selectByConditionAndPagination(String name, Short gender, LocalDate startDate, LocalDate endDate, Integer index, Integer size);
 }
