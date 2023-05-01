@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="cn.mycloudway.mapper.EmployeeMapper">
+    <sql id="selectEmployee">
+        SELECT
+            id,
+            username,
+            password,
+            name,
+            gender,
+            image,
+            job,
+            entry_date,
+            dept_id,
+            create_time,
+            update_time
+        FROM
+            tb_employee
+    </sql>
+
+    <sql id="searchCondition">
+        <where>
+            <if test="name != null">
+                AND name LIKE concat('%', #{name}, '%')
+            </if>
+            <if test="gender != null">
+                AND gender = #{gender}
+            </if>
+            <if test="startDate != null and endDate != null">
+                AND entry_date BETWEEN #{startDate} AND #{endDate}
+            </if>
+        </where>
+    </sql>
+    
+    <select id="getCountByCondition" resultType="Integer">
+        SELECT
+            COUNT(*)
+        FROM
+            tb_employee
+        <include refid="searchCondition"/>
+    </select>
+    
+    <select id="selectByConditionAndPagination" resultType="cn.mycloudway.pojo.Employee">
+        <include refid="selectEmployee"/>
+        <include refid="searchCondition"/>
+        LIMIT
+            #{index}, #{size}
+    </select>
+</mapper>
