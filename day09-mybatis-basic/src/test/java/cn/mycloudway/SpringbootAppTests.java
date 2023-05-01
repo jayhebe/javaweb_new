@@ -8,6 +8,8 @@ import org.springframework.boot.test.context.SpringBootTest;
 
 import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 @SpringBootTest
@@ -17,7 +19,7 @@ public class SpringbootAppTests {
 
     @Test
     public void testGetById() {
-        Emp emp = empMapper.getById(20);
+        Emp emp = empMapper.getById(15);
         System.out.println(emp);
     }
 
@@ -66,7 +68,27 @@ public class SpringbootAppTests {
     }
 
     @Test
+    public void testUpdate2() {
+        Emp emp = new Emp();
+        emp.setId(19);
+        emp.setUsername("Lisa");
+        emp.setName("李萨222");
+        emp.setGender((short) 1);
+        emp.setUpdateTime(LocalDateTime.now());
+
+        empMapper.update(emp);
+    }
+
+    @Test
     public void testDelete() {
         empMapper.delete(16);
+    }
+
+    @Test
+    public void testDeleteByIds() {
+        List<Integer> ids = new ArrayList<>();
+        Collections.addAll(ids, 15);
+
+        empMapper.deleteByIds(ids);
     }
 }

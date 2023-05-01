@@ -1,0 +1,97 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="cn.mycloudway.mapper.EmpMapper">
+    <sql id="commonSelect">
+        SELECT
+            id,
+            username,
+            password,
+            name,
+            gender,
+            image,
+            job,
+            entrydate,
+            dept_id,
+            create_time,
+            update_time
+        FROM
+            emp
+    </sql>
+    <select id="getById" resultType="cn.mycloudway.pojo.Emp">
+        <include refid="commonSelect"/>
+        WHERE
+            id = #{id}
+    </select>
+    
+    <select id="getByCondition" resultType="cn.mycloudway.pojo.Emp">
+        <include refid="commonSelect"/>
+        <where>
+            <if test="name != null">
+                AND name LIKE concat('%', #{name}, '%')
+            </if>
+            <if test="gender != null">
+                AND gender = #{gender}
+            </if>
+            <if test="startDate != null and endDate != null">
+                AND entrydate BETWEEN #{startDate} AND #{endDate}
+            </if>
+        </where>
+        ORDER BY update_time DESC
+    </select>
+    
+    <insert id="insert" useGeneratedKeys="true" keyProperty="id">
+        INSERT INTO emp
+            (username, name, gender, image, job, entrydate, dept_id, create_time, update_time)
+        VALUES
+            (#{username}, #{name}, #{gender}, #{image}, #{job}, #{entryDate}, #{deptId}, #{createTime}, #{updateTime})
+    </insert>
+    
+    <update id="update">
+        UPDATE
+            emp
+        <set>
+            <if test="username != null">
+                username = #{username},
+            </if>
+            <if test="name != null">
+                name = #{name},
+            </if>
+            <if test="gender != null">
+                gender = #{gender},
+            </if>
+            <if test="image != null">
+                image = #{image},
+            </if>
+            <if test="job != null">
+                job = #{job},
+            </if>
+            <if test="entryDate != null">
+                entrydate = #{entryDate},
+            </if>
+            <if test="deptId != null">
+                dept_id = #{deptId},
+            </if>
+            <if test="updateTime != null">
+                update_time = #{updateTime}
+            </if>
+        </set>
+        WHERE
+            id = #{id}
+    </update>
+    
+    <delete id="delete">
+        DELETE FROM emp WHERE id = #{id}
+    </delete>
+
+    <delete id="deleteByIds">
+        DELETE FROM
+            emp
+        WHERE
+            id in
+        <foreach collection="ids" item="id" separator="," open="(" close=")">
+            #{id}
+        </foreach>
+    </delete>
+</mapper>
