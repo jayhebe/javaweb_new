@@ -31,6 +31,14 @@ public class EmployeeController {
         return Result.success(employeePageBean);
     }
 
+    @GetMapping("/{id}")
+    public Result selectById(@PathVariable Integer id) {
+        Employee employee = employeeService.selectById(id);
+        log.info("根据ID查询员工，ID值为：{}", id);
+
+        return Result.success(employee);
+    }
+
     @PostMapping
     public Result add(@RequestBody Employee employee) {
         employeeService.add(employee);

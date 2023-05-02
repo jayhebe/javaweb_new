@@ -34,11 +34,18 @@
         </where>
         ORDER BY
             update_time
+        DESC
     </sql>
     
     <select id="selectByCondition" resultType="cn.mycloudway.pojo.Employee">
         <include refid="selectEmployee"/>
         <include refid="searchCondition"/>
+    </select>
+
+    <select id="selectById" resultType="cn.mycloudway.pojo.Employee">
+        <include refid="selectEmployee"/>
+        WHERE
+            id = #{id}
     </select>
 
     <insert id="add">

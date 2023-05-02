@@ -33,6 +33,11 @@ public class EmployeeServiceImpl implements EmployeeService {
     }
 
     @Override
+    public Employee selectById(Integer id) {
+        return employeeMapper.selectById(id);
+    }
+
+    @Override
     public void add(Employee employee) {
         employee.setCreateTime(LocalDateTime.now());
         employee.setUpdateTime(LocalDateTime.now());

@@ -10,6 +10,8 @@ import java.util.List;
 public interface EmployeeMapper {
     public List<Employee> selectByCondition(String name, Short gender, LocalDate startDate, LocalDate endDate);
 
+    public Employee selectById(Integer id);
+
     public void add(Employee employee);
 
     public void deleteByIds(Integer[] ids);
