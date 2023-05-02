@@ -4,11 +4,13 @@ import cn.mycloudway.mapper.EmployeeMapper;
 import cn.mycloudway.pojo.Employee;
 import cn.mycloudway.pojo.PageBean;
 import cn.mycloudway.service.EmployeeService;
+import com.github.pagehelper.Page;
+import com.github.pagehelper.PageHelper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import org.springframework.web.bind.annotation.RequestParam;
 
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.List;
 
 @Service
@@ -17,15 +19,29 @@ public class EmployeeServiceImpl implements EmployeeService {
     private EmployeeMapper employeeMapper;
 
     @Override
-    public PageBean<Employee> selectByConditionAndPagination(String name, Short gender, LocalDate startDate, LocalDate endDate, Integer page, Integer pageSize) {
-        Long total = employeeMapper.getCountByCondition(name, gender, startDate, endDate);
-        int index = (page - 1) * pageSize;
-        List<Employee> employeeList = employeeMapper.selectByConditionAndPagination(name, gender, startDate, endDate, index, pageSize);
+    public PageBean<Employee> selectByConditionAndPagination(String name, Short gender, LocalDate startDate, LocalDate endDate, Integer pageNum, Integer pageSize) {
+        PageHelper.startPage(pageNum, pageSize);
+
+        List<Employee> employeeList = employeeMapper.selectByCondition(name, gender, startDate, endDate);
+        Page<Employee> page = (Page<Employee>) employeeList;
 
         PageBean<Employee> employeePageBean = new PageBean<>();
-        employeePageBean.setTotal(total);
-        employeePageBean.setRows(employeeList);
+        employeePageBean.setTotal(page.getTotal());
+        employeePageBean.setRows(page.getResult());
 
         return employeePageBean;
+    }
+
+    @Override
+    public void add(Employee employee) {
+        employee.setCreateTime(LocalDateTime.now());
+        employee.setUpdateTime(LocalDateTime.now());
+
+        employeeMapper.add(employee);
+    }
+
+    @Override
+    public void deleteByIds(Integer[] ids) {
+        employeeMapper.deleteByIds(ids);
     }
 }

@@ -22,7 +22,7 @@
 
     <sql id="searchCondition">
         <where>
-            <if test="name != null">
+            <if test="name != null and name != ''">
                 AND name LIKE concat('%', #{name}, '%')
             </if>
             <if test="gender != null">
@@ -32,20 +32,28 @@
                 AND entry_date BETWEEN #{startDate} AND #{endDate}
             </if>
         </where>
+        ORDER BY
+            update_time
     </sql>
     
-    <select id="getCountByCondition" resultType="Long">
-        SELECT
-            COUNT(*)
-        FROM
-            tb_employee
-        <include refid="searchCondition"/>
-    </select>
-    
-    <select id="selectByConditionAndPagination" resultType="cn.mycloudway.pojo.Employee">
+    <select id="selectByCondition" resultType="cn.mycloudway.pojo.Employee">
         <include refid="selectEmployee"/>
         <include refid="searchCondition"/>
-        LIMIT
-            #{index}, #{size}
     </select>
+
+    <insert id="add">
+        INSERT INTO
+            tb_employee (username, name, gender, job, image, entry_date, dept_id, create_time, update_time)
+        VALUES
+            (#{username}, #{name}, #{gender}, #{job}, #{image}, #{entryDate}, #{deptId}, #{createTime}, #{updateTime})
+    </insert>
+
+    <delete id="deleteByIds">
+        DELETE FROM
+            tb_employee
+        WHERE id IN
+        <foreach collection="ids" item="id" separator="," open="(" close=")">
+            #{id}
+        </foreach>
+    </delete>
 </mapper>
