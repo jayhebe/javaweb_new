@@ -55,6 +55,39 @@
             (#{username}, #{name}, #{gender}, #{job}, #{image}, #{entryDate}, #{deptId}, #{createTime}, #{updateTime})
     </insert>
 
+    <update id="edit">
+        UPDATE
+            tb_employee
+        <set>
+            <if test="username != null and username != ''">
+                username = #{username},
+            </if>
+            <if test="name != null and name != ''">
+                name = #{name},
+            </if>
+            <if test="gender != null">
+                gender = #{gender},
+            </if>
+            <if test="image != null and image != ''">
+                image = #{image},
+            </if>
+            <if test="deptId != null">
+                dept_id = #{deptId},
+            </if>
+            <if test="entryDate != null">
+                entry_date = #{entryDate},
+            </if>
+            <if test="job != null">
+                job = #{job},
+            </if>
+            <if test="updateTime != null">
+                update_time = #{updateTime}
+            </if>
+        </set>
+        WHERE
+            id = #{id}
+    </update>
+
     <delete id="deleteByIds">
         DELETE FROM
             tb_employee

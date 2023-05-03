@@ -47,6 +47,14 @@ public class EmployeeController {
         return Result.success();
     }
 
+    @PutMapping
+    public Result edit(@RequestBody Employee employee) {
+        employeeService.edit(employee);
+        log.info("修改员工信息：{}", employee);
+
+        return Result.success();
+    }
+
     @DeleteMapping("/{ids}")
     public Result deleteByIds(@PathVariable Integer[] ids) {
         employeeService.deleteByIds(ids);

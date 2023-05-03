@@ -46,6 +46,13 @@ public class EmployeeServiceImpl implements EmployeeService {
     }
 
     @Override
+    public void edit(Employee employee) {
+        employee.setUpdateTime(LocalDateTime.now());
+
+        employeeMapper.edit(employee);
+    }
+
+    @Override
     public void deleteByIds(Integer[] ids) {
         employeeMapper.deleteByIds(ids);
     }

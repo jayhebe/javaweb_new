@@ -12,5 +12,7 @@ public interface EmployeeService {
 
     public void add(Employee employee);
 
+    public void edit(Employee employee);
+
     public void deleteByIds(Integer[] ids);
 }
