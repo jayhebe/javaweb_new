@@ -18,6 +18,7 @@ import java.util.Arrays;
 public class EmployeeController {
     @Autowired
     private EmployeeService employeeService;
+
     @GetMapping
     public Result selectByConditionAndPagination(String name, Short gender,
                                                  @DateTimeFormat(pattern = "yyyy-MM-dd") LocalDate begin,

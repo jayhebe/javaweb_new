@@ -14,6 +14,7 @@ import java.util.UUID;
 public class AliOSSUtils {
     @Autowired
     private AliOSSProperties aliOSSProperties;
+
     public String upload(MultipartFile file) throws IOException {
         String endpoint = aliOSSProperties.getEndpoint();
         String accessKey = aliOSSProperties.getAccessKey();

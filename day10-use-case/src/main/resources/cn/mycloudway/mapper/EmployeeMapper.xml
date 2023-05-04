@@ -107,4 +107,11 @@
         AND
             password = #{password}
     </select>
+
+    <delete id="deleteByDeptId">
+        DELETE FROM
+            tb_employee
+        WHERE
+            dept_id = #{deptId}
+    </delete>
 </mapper>

@@ -16,6 +16,7 @@ import java.io.IOException;
 public class LoginFilter implements Filter {
     @Autowired
     private JWTUtils jwtUtils;
+
     @Override
     public void doFilter(ServletRequest servletRequest, ServletResponse servletResponse, FilterChain filterChain) throws IOException, ServletException {
         HttpServletRequest httpServletRequest = (HttpServletRequest) servletRequest;

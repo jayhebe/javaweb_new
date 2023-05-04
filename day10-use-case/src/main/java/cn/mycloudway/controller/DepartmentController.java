@@ -15,6 +15,7 @@ import java.util.List;
 public class DepartmentController {
     @Autowired
     private DepartmentService departmentService;
+
     @GetMapping
     public Result selectAll() {
         List<Department> departmentList = departmentService.selectAll();

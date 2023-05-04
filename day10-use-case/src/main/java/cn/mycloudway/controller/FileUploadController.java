@@ -15,6 +15,7 @@ import java.io.IOException;
 public class FileUploadController {
     @Autowired
     private AliOSSUtils aliOSSUtils;
+
     @PostMapping("/upload")
     public Result upload(MultipartFile image) throws IOException {
         log.info("文件上传, 文件名: {}", image.getOriginalFilename());
