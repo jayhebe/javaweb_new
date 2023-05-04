@@ -56,4 +56,9 @@ public class EmployeeServiceImpl implements EmployeeService {
     public void deleteByIds(Integer[] ids) {
         employeeMapper.deleteByIds(ids);
     }
+
+    @Override
+    public Employee login(Employee employee) {
+        return employeeMapper.selectByUsernameAndPassword(employee);
+    }
 }

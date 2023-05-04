@@ -96,4 +96,15 @@
             #{id}
         </foreach>
     </delete>
+
+    <select id="selectByUsernameAndPassword" resultType="cn.mycloudway.pojo.Employee">
+        SELECT
+            *
+        FROM
+            tb_employee
+        WHERE
+            username = #{username}
+        AND
+            password = #{password}
+    </select>
 </mapper>

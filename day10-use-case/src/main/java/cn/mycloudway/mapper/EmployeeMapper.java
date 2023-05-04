@@ -17,4 +17,6 @@ public interface EmployeeMapper {
     public void edit(Employee employee);
 
     public void deleteByIds(Integer[] ids);
+
+    public Employee selectByUsernameAndPassword(Employee employee);
 }

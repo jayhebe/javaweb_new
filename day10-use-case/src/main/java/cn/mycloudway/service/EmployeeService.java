@@ -15,4 +15,6 @@ public interface EmployeeService {
     public void edit(Employee employee);
 
     public void deleteByIds(Integer[] ids);
+
+    public Employee login(Employee employee);
 }
