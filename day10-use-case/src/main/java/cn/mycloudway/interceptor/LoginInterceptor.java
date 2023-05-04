@@ -35,8 +35,8 @@ public class LoginInterceptor implements HandlerInterceptor {
         try {
             jwtUtils.verifyJWT(token);
         } catch (Exception e) {
-            e.printStackTrace();
-            log.info("解析令牌失败，返回未登录信息");
+            log.error(e.getMessage());
+            log.error("解析令牌失败，返回未登录信息");
             String notLogin = JSONObject.toJSONString(Result.error("NOT_LOGIN"));
             response.getWriter().write(notLogin);
 
