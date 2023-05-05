@@ -1,5 +1,6 @@
 package cn.mycloudway.controller;
 
+import cn.mycloudway.annotation.Log;
 import cn.mycloudway.pojo.Employee;
 import cn.mycloudway.pojo.PageBean;
 import cn.mycloudway.pojo.Result;
@@ -40,6 +41,7 @@ public class EmployeeController {
         return Result.success(employee);
     }
 
+    @Log
     @PostMapping
     public Result add(@RequestBody Employee employee) {
         employeeService.add(employee);
@@ -48,6 +50,7 @@ public class EmployeeController {
         return Result.success();
     }
 
+    @Log
     @PutMapping
     public Result edit(@RequestBody Employee employee) {
         employeeService.edit(employee);
@@ -56,6 +59,7 @@ public class EmployeeController {
         return Result.success();
     }
 
+    @Log
     @DeleteMapping("/{ids}")
     public Result deleteByIds(@PathVariable Integer[] ids) {
         employeeService.deleteByIds(ids);

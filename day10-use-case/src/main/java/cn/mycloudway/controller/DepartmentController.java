@@ -1,5 +1,6 @@
 package cn.mycloudway.controller;
 
+import cn.mycloudway.annotation.Log;
 import cn.mycloudway.pojo.Department;
 import cn.mycloudway.pojo.Result;
 import cn.mycloudway.service.DepartmentService;
@@ -32,6 +33,7 @@ public class DepartmentController {
         return Result.success(department);
     }
 
+    @Log
     @DeleteMapping("/{id}")
     public Result deleteById(@PathVariable Integer id) {
         departmentService.deleteById(id);
@@ -40,6 +42,7 @@ public class DepartmentController {
         return Result.success();
     }
 
+    @Log
     @PostMapping
     public Result add(@RequestBody Department department) {
         departmentService.add(department);
@@ -48,6 +51,7 @@ public class DepartmentController {
         return Result.success();
     }
 
+    @Log
     @PutMapping
     public Result edit(@RequestBody Department department) {
         departmentService.edit(department);
