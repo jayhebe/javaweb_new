@@ -1,0 +1,117 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="cn.mycloudway.mapper.EmployeeMapper">
+    <sql id="selectEmployee">
+        SELECT
+            id,
+            username,
+            password,
+            name,
+            gender,
+            image,
+            job,
+            entry_date,
+            dept_id,
+            create_time,
+            update_time
+        FROM
+            tb_employee
+    </sql>
+
+    <sql id="searchCondition">
+        <where>
+            <if test="name != null and name != ''">
+                AND name LIKE concat('%', #{name}, '%')
+            </if>
+            <if test="gender != null">
+                AND gender = #{gender}
+            </if>
+            <if test="startDate != null and endDate != null">
+                AND entry_date BETWEEN #{startDate} AND #{endDate}
+            </if>
+        </where>
+        ORDER BY
+            update_time
+        DESC
+    </sql>
+    
+    <select id="selectByCondition" resultType="cn.mycloudway.pojo.Employee">
+        <include refid="selectEmployee"/>
+        <include refid="searchCondition"/>
+    </select>
+
+    <select id="selectById" resultType="cn.mycloudway.pojo.Employee">
+        <include refid="selectEmployee"/>
+        WHERE
+            id = #{id}
+    </select>
+
+    <insert id="add">
+        INSERT INTO
+            tb_employee (username, name, gender, job, image, entry_date, dept_id, create_time, update_time)
+        VALUES
+            (#{username}, #{name}, #{gender}, #{job}, #{image}, #{entryDate}, #{deptId}, #{createTime}, #{updateTime})
+    </insert>
+
+    <update id="edit">
+        UPDATE
+            tb_employee
+        <set>
+            <if test="username != null and username != ''">
+                username = #{username},
+            </if>
+            <if test="name != null and name != ''">
+                name = #{name},
+            </if>
+            <if test="gender != null">
+                gender = #{gender},
+            </if>
+            <if test="image != null and image != ''">
+                image = #{image},
+            </if>
+            <if test="deptId != null">
+                dept_id = #{deptId},
+            </if>
+            <if test="entryDate != null">
+                entry_date = #{entryDate},
+            </if>
+            <if test="job != null">
+                job = #{job},
+            </if>
+            <if test="updateTime != null">
+                update_time = #{updateTime}
+            </if>
+        </set>
+        WHERE
+            id = #{id}
+    </update>
+
+    <delete id="deleteByIds">
+        DELETE FROM
+            tb_employee
+        WHERE id IN
+        <foreach collection="ids" item="id" separator="," open="(" close=")">
+            #{id}
+        </foreach>
+    </delete>
+
+    <select id="selectByUsernameAndPassword" resultType="cn.mycloudway.pojo.Employee">
+        SELECT
+            *
+        FROM
+            tb_employee
+        WHERE
+            username = #{username}
+        AND
+            password = #{password}
+    </select>
+
+    <delete id="deleteByDeptId">
+        DELETE FROM
+            tb_employee
+        WHERE
+            dept_id = #{deptId}
+    </delete>
+</mapper>

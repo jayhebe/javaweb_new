@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="cn.mycloudway.mapper.DepartmentMapper">
+    <sql id="selectDepartment">
+        SELECT
+        id,
+        name,
+        create_time,
+        update_time
+        FROM
+        tb_department
+    </sql>
+
+    <select id="selectAll" resultType="cn.mycloudway.pojo.Department">
+        <include refid="selectDepartment"/>
+    </select>
+
+    <select id="selectById" resultType="cn.mycloudway.pojo.Department">
+        <include refid="selectDepartment"/>
+        WHERE
+            id = #{id}
+    </select>
+    
+    <update id="edit">
+        UPDATE
+            tb_department
+        <set>
+            <if test="name != null">
+                name = #{name},
+            </if>
+            <if test="updateTime != null">
+                update_time = #{updateTime}
+            </if>
+        </set>
+        WHERE
+            id = #{id}
+    </update>
+
+    <delete id="deleteById">
+        DELETE FROM
+            tb_department
+        WHERE
+            id = #{id}
+    </delete>
+
+    <insert id="add">
+        INSERT INTO
+            tb_department (name, create_time, update_time)
+        VALUES
+            (#{name}, #{createTime}, #{updateTime})
+    </insert>
+</mapper>
